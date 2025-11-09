@@ -27,7 +27,7 @@ def train_step(
 
     with tf.GradientTape() as tape:
         pred_stm, pred_drv = model(
-            features, policies, prev, training=True
+            features, policies=policies, prev=prev, training=True
         )
         fit = statement_fit_loss(pred_stm, targets, weights=weights_map)
         guard = identity_guardrail(pred_stm)
@@ -54,7 +54,7 @@ def eval_fit(
     """
 
     pred_stm, pred_drv = model(
-        features, policies, prev, training=False
+        features, policies=policies, prev=prev, training=False
     )
     fit = statement_fit_loss(pred_stm, targets, weights=weights_map)
     return fit, pred_stm, pred_drv

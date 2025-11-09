@@ -3,12 +3,12 @@ channels:
   - conda-forge
 dependencies:
   - python=3.11
-  - numpy
+  - numpy<2           
   - pandas
   - pip
   - matplotlib
   - pip:
-      - tensorflow==2.12.*
+      - tensorflow-macos==2.12.*
       - yahoofinancials
       - pytest
       - pytest-cov

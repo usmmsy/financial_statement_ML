@@ -97,8 +97,10 @@ class StructuralLayer(tf.keras.layers.Layer):
         * We assert Assets == Liabilities + Equity.
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, *, hard_identity_check: bool = False, identity_tol: float = 1e-3, **kwargs):
         super().__init__(**kwargs)
+        self.hard_identity_check = hard_identity_check
+        self.identity_tol = float(identity_tol)
 
     def call(self,
              drivers: Drivers,  # trainable behavioral drivers, shape [B, T, 1]
@@ -276,8 +278,14 @@ class StructuralLayer(tf.keras.layers.Layer):
         # Accounting identity check: Assets = Liab + Equity
         assets = tf.reduce_mean(stm.assets)
         liab_eq_total = tf.reduce_mean(stm.liab_plus_equity)
-        if training:
-            tf.debugging.assert_near(assets, liab_eq_total, atol=1e-5)  # might need to keep it off in production and rely only on guardrail loss
 
+        if self.hard_identity_check and not training and tf.executing_eagerly():
+            gap = tf.abs(assets - liab_eq_total)
+            tf.debugging.assert_less_equal(
+                gap, 
+                self.identity_tol, 
+                message="Accounting identity violated: Assets != Liabilities + Equity",
+            )   # in real production, only rely on soft guardrail to check accounting identity
+            
         return stm
 

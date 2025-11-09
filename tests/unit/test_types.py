@@ -198,3 +198,17 @@ def test_statements_handles_negatives_and_nans(ones_bt):
     )
     _ = s.assets  # should compute without raising
     _ = s.liab_plus_equity
+
+def test_policies_slicing_shape(mk_policies):
+    B, T = 2, 3
+    p = mk_policies(B, T)
+    ps = p[:, 1:2, :]
+    assert ps.inflation.shape == (B, 1, 1)
+    # None fields stay None
+    assert ps.lt_rate is None
+
+def test_policies_batch_index(mk_policies):
+    B, T = 3, 2
+    p = mk_policies(B, T)
+    p0 = p[0:1, :, :]
+    assert p0.inflation.shape == (1, T, 1)

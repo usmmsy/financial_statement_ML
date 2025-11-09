@@ -3,6 +3,6 @@ numpy
 pytest
 pytest-cov
 pandas
-tensorflow
+tensorflow==2.12.*
 yfinance
 yahoofinancials
