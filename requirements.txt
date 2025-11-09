@@ -1,0 +1,8 @@
+matplotlib
+numpy
+pytest
+pytest-cov
+pandas
+tensorflow
+yfinance
+yahoofinancials

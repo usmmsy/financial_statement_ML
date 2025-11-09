@@ -1,0 +1,39 @@
+balance_sheet_forecaster/
+├─ src/
+│  └─ balance_sheet_forecaster/
+│     ├─ __init__.py
+│     ├─ types.py
+│     ├─ accounting.py
+│     ├─ drivers.py
+│     ├─ model.py
+│     ├─ rollout.py
+│     ├─ training.py
+│     ├─ losses.py
+│     ├─ data.py
+│     ├─ config.py
+│     └─ utils_logging.py
+│
+├─ configs/
+│  ├─ baseline_policy.yaml
+│  ├─ stress_high_rates.yaml
+│  └─ training.yaml
+│
+├─ scripts/
+│  ├─ train.py
+│  ├─ forecast.py
+│  └─ explain_period.py
+│
+├─ tests/
+│  ├─ test_unit_accounting.py
+│  ├─ test_integration_rollout.py
+│  └─ test_losses.py
+│
+├─ notebooks/
+│  └─ exploration.ipynb
+│
+├─ README.md
+├─ CHANGELOG.md
+├─ requirements.txt
+├─ pyproject.toml  (or setup.py / setup.cfg if using setuptools)
+├─ .gitignore
+└─ LICENSE  (or INTERNAL_USE_ONLY notice)

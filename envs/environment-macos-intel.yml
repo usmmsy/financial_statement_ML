@@ -1,0 +1,19 @@
+name: bsforecast
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy<2           # TF 2.12 expects NumPy 1.x ABI
+  - pandas
+  - scipy
+  - matplotlib
+  - pip
+  - pytest
+  - pytest-cov
+  - protobuf<4        # TF 2.12 comfort pin
+  - pip:
+      - tensorflow==2.12.*
+      # your extras:
+      - yahoofinancials
+      - bayoo-docx
