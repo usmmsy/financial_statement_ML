@@ -1,0 +1,44 @@
+# Walmart-specific training loss configuration
+# Composite loss combines per-line masked L1 fits with accounting identity gap and
+# retained earnings consistency. Adjust weights to emphasize strict balance vs line accuracy.
+
+identity_weight: 5.0          # weight applied to identity gap (mean absolute assets - liab+equity)
+retained_weight: 2.0          # weight for retained earnings consistency (ΔRE vs NI - Dividends)
+include_identity: true
+include_retained: true
+
+# Optional per-line weights (any line omitted defaults to 1.0)
+line_weights:
+  sales: 0.5
+  cogs: 0.5
+  opex: 0.7
+  ebit: 1.0
+  ar: 0.5
+  ap: 0.5
+  inventory: 0.5
+  net_ppe: 0.5
+  equity: 1.0
+  other_current_assets: 0.3
+  goodwill_intangibles: 0.2
+  other_non_current_assets: 0.2
+  accrued_expenses: 0.3
+  tax_payable: 0.3
+  other_non_current_liabilities: 0.25
+  aoci: 0.15
+  minority_interest: 0.2
+  current_capital_lease_obligation: 0.4
+  long_term_capital_lease_obligation: 0.4
+  dividends_payable: 0.3
+  current_deferred_liabilities: 0.35
+  other_payables: 0.3
+  capital_stock: 0.25
+
+# Example usage (pseudo-code):
+# from wmt_bs_forecaster.losses_wmt import wmt_fit_loss
+# cfg = yaml.safe_load(open('configs/training_wmt.yaml'))
+# loss_out = wmt_fit_loss(statements, targets, weights=cfg['line_weights'],
+#                         include_identity=cfg['include_identity'],
+#                         include_retained=cfg['include_retained'],
+#                         identity_weight=cfg['identity_weight'],
+#                         retained_weight=cfg['retained_weight'])
+# total_loss = loss_out['total']

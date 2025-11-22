@@ -1,8 +1,9 @@
 matplotlib
 numpy
+pathlib
 pytest
 pytest-cov
 pandas
 tensorflow==2.12.*
 yfinance
-yahoofinancials
+pyyaml

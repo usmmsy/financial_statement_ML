@@ -1,0 +1,20 @@
+identity_weight: 5.0
+retained_weight: 2.0
+line_weights:
+	sales: 0.5
+	cogs: 0.5
+	opex: 0.7
+	ebit: 1.0
+	ar: 0.5
+	ap: 0.5
+	inventory: 0.5
+	net_ppe: 0.5
+	equity: 1.0
+	other_current_assets: 0.3
+	goodwill_intangibles: 0.2
+	other_non_current_assets: 0.2
+	accrued_expenses: 0.3
+	tax_payable: 0.3
+	other_non_current_liabilities: 0.25
+	aoci: 0.15
+	minority_interest: 0.2

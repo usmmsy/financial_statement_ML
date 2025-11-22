@@ -8,8 +8,8 @@ dependencies:
   - pip
   - matplotlib
   - pip:
-      - tensorflow==2.12.*
-      - yahoofinancials
+  - tensorflow==2.12.*
+  - yfinance
       - pytest
       - pytest-cov
       - black
