@@ -60,7 +60,6 @@ Any older or "archive" notebooks, scripts, or model definitions outside these pa
 To run the focused tests for this WMT forecaster:
 
 ```powershell
-conda activate bsforecast
 pytest tests\unit\wmt
 pytest tests\integration\test_wmt_pipeline.py
 ```
