@@ -563,7 +563,7 @@ def calibration_loss(stmts: StatementsWMT, bal: pd.DataFrame, fin: pd.DataFrame,
         (gp_t, stmts.gross_profit),
         (opex_t, stmts.opex),
         (depr_t, stmts.depreciation),
-        (ni_t, stmts.net_income),
+        (ni_t - depr_t, stmts.net_income),
     ]:
         if target is not None:
             loss_is += rel_rmse(model, target)
@@ -592,15 +592,15 @@ def calibration_loss(stmts: StatementsWMT, bal: pd.DataFrame, fin: pd.DataFrame,
     # Weighted combination, with BS now directly including OCA,
     # leases, and debt lines alongside the other balance sheet
     # targets. Working-capital CF remains a separate term.
-    w_identity = 0.0
-    w_bs = 0.0
-    w_is = 2.0
-    # w_wc = 0.05
+    w_identity = 1.0
+    w_bs = 1.0
+    w_is = 1.0
+    w_wc = 0.0
 
-    return w_identity * loss_identity + w_bs * loss_bs + w_is * loss_is # + w_wc * wc_t
+    return w_identity * loss_identity + w_bs * loss_bs + w_is * loss_is + w_wc * wc_t
 
 
-def main(steps: int = 200, lr: float = 1e-2) -> None:
+def main(steps: int = 200, lr: float = 1e-3) -> None:
     q = load_quarterlies_train()
     bal, fin, cf, cols = q["bal"], q["fin"], q["cf"], q["cols"]
 

@@ -780,16 +780,20 @@ def main(horizon_quarters: int = 1) -> None:
     # Assets side
     cash_arr = stmts.cash.numpy()[0, :, 0]
     st_inv_arr = stmts.st_investments.numpy()[0, :, 0]
+    ar_arr = stmts.ar.numpy()[0, :, 0]
     inventory_arr = stmts.inventory.numpy()[0, :, 0]
     oca_arr = stmts.other_current_assets.numpy()[0, :, 0]
     goodwill_arr = stmts.goodwill_intangibles.numpy()[0, :, 0]
+    onca_arr = stmts.other_non_current_assets.numpy()[0, :, 0]
     net_ppe_arr = stmts.net_ppe.numpy()[0, :, 0]
     assets_arr = assets.numpy()[0, :, 0]
     print("Cash forecast:", cash_arr)
     print("Short-term investments forecast:", st_inv_arr)
+    print("Accounts Receivable forecast:", ar_arr)
     print("Inventory forecast:", inventory_arr)
     print("Other Current Assets forecast:", oca_arr)
     print("Goodwill & Intangibles forecast:", goodwill_arr)
+    print("Other Non-Current Assets forecast:", onca_arr)
     print("Net PPE forecast:", net_ppe_arr)
     print("Assets forecast:", assets_arr)
     # Liabilities side
@@ -850,9 +854,11 @@ def main(horizon_quarters: int = 1) -> None:
         "period": periods,
         "cash": cash_arr,
         "st_investments": st_inv_arr,
+        "accounts_receivable": ar_arr,
         "inventory": inventory_arr,
         "other_current_assets": oca_arr,
         "goodwill_intangibles": goodwill_arr,
+        "other_non_current_assets": onca_arr,
         "net_ppe": net_ppe_arr,
         "assets": assets_arr,
         "st_debt": st_debt_arr,

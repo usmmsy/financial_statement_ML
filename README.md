@@ -1,6 +1,71 @@
 # Walmart One-Quarter Balance Sheet Forecaster
 
-This project implements a structural, machine-learning–assisted model to forecast Walmart's balance sheet (and linked income and cash-flow statements) one quarter ahead.
+This repository implements a structural, machine-learning–assisted model to forecast Walmart's balance sheet (and linked income and cash-flow statements) one quarter ahead. It contains a Walmart (WMT) case study built on a double-entry structural accounting layer in TensorFlow.
+
+---
+
+## 1. Prerequisites
+
+- Python 3.10 or 3.11
+- Git
+- (Recommended) Conda or mamba for environment management
+
+On Windows, all example commands below assume PowerShell.
+
+---
+
+## 2. Clone the repository
+
+```powershell
+git clone https://github.com/usmmsy/financial_statement_ML.git
+cd financial_statement_ML
+```
+
+---
+
+## 3. Set up the Python environment
+
+### Option A: Conda (recommended)
+
+A full environment spec is provided for Windows:
+
+```powershell
+conda env create -f envs/environment-windows.yml
+conda activate bsforecast
+```
+
+### Option B: Virtualenv + pip
+
+```powershell
+python -m venv .venv
+. .venv/Scripts/activate
+
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+The `requirements.txt` includes the core dependencies:
+
+- `numpy`, `pandas`, `matplotlib`
+- `tensorflow==2.12.*`
+- `yfinance`, `pyyaml`, `statsmodels`
+- `pytest`, `pytest-cov`
+
+---
+
+## 4. Data
+
+The Walmart quarterly CSVs used in the case study are already included:
+
+- `data/retail_csv/WMT_quarterly/WMT_quarterly_balance_sheet.csv`
+- `data/retail_csv/WMT_quarterly/WMT_quarterly_financials.csv`
+- `data/retail_csv/WMT_quarterly/WMT_quarterly_cash_flow.csv`
+
+No additional download is required to run the WMT example pipeline.
+
+---
+
+## 5. End-to-end WMT pipeline
 
 The core flow is an end-to-end pipeline:
 
@@ -30,20 +95,25 @@ The core flow is an end-to-end pipeline:
      python scripts\wmt_bs_model_pipeline.py
      ```
 
-## Core model code
+---
+
+## 6. Core model code
 
 The structural model and typed containers live under `src/wmt_bs_forecaster`:
 
 - `types_wmt.py` — dataclasses-like typed containers for policies, drivers, previous state, and forecast statements.
 - `accounting_wmt.py` — deterministic structural layer implementing a Vélez‑Pareja–style roll-forward of the three statements, with explicit working capital, PPE, leases, equity, and identity checks.
 
-At this point, the following files' functionalities are wrapped inside pipeline scripts (`estimate_wmt.py`, `train_wmt.py` and `forecast_wmt.py`), but in the future will be fullfilled as we expand our application.
+At this point, the following files' functionalities are wrapped inside pipeline scripts (`estimate_wmt.py`, `train_wmt.py` and `forecast_wmt.py`), but in the future will be fulfilled as we expand the application:
+
 - `drivers_wmt.py`, `data_wmt.py`, `model_wmt.py`, `forecast_heads.py` — supporting helpers for data loading, driver construction, and potential model extensions.
 - `losses_wmt.py` — WMT-specific loss functions used during calibration.
 
 Unit tests live under `tests/unit/wmt`, and integration tests for the end-to-end pipeline are under `tests/integration/test_wmt_pipeline.py`.
 
-## Obsolete / archive code
+---
+
+## 7. Obsolete / archive code
 
 This repository originally contained a more generic or earlier-iteration set of scripts and helper modules. The **authoritative** path for the current Walmart one-quarter forecast is:
 
@@ -55,7 +125,9 @@ This repository originally contained a more generic or earlier-iteration set of 
 
 Any older or "archive" notebooks, scripts, or model definitions outside these paths should be considered **obsolete** and are kept only for reference. When in doubt, prefer the WMT-specific modules listed above and the pipeline wrapper.
 
-## Running tests
+---
+
+## 8. Running tests
 
 To run the focused tests for this WMT forecaster:
 

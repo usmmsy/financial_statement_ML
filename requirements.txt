@@ -1,5 +1,6 @@
 matplotlib
 numpy
+os
 pathlib
 pytest
 pytest-cov
@@ -7,3 +8,4 @@ pandas
 tensorflow==2.12.*
 yfinance
 pyyaml
+statesmodels
