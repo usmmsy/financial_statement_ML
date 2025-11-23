@@ -592,9 +592,9 @@ def calibration_loss(stmts: StatementsWMT, bal: pd.DataFrame, fin: pd.DataFrame,
     # Weighted combination, with BS now directly including OCA,
     # leases, and debt lines alongside the other balance sheet
     # targets. Working-capital CF remains a separate term.
-    w_identity = 0.2
-    w_bs = 0.5
-    w_is = 0.3
+    w_identity = 0.0
+    w_bs = 0.2
+    w_is = 0.8
     # w_wc = 0.05
 
     return w_identity * loss_identity + w_bs * loss_bs + w_is * loss_is # + w_wc * wc_t
